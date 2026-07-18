@@ -1,4 +1,28 @@
+import { useState } from "react";
+import { likePost, unlikePost } from "../services/postService";
+
 function PostCard({ post }) {
+  const [liked, setLiked] = useState(post.liked);
+  const [likeCount, setLikeCount] = useState(post.likeCount);
+
+  const handleLike = async () => {
+    try {
+      if (liked) {
+        const response = await unlikePost(post.id);
+
+        setLiked(response.data.data.liked);
+        setLikeCount(response.data.data.likeCount);
+      } else {
+        const response = await likePost(post.id);
+
+        setLiked(response.data.data.liked);
+        setLikeCount(response.data.data.likeCount);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="card mb-4 shadow-sm">
       <img src={post.imageUrl} alt="Post" className="card-img-top" />
@@ -8,9 +32,13 @@ function PostCard({ post }) {
 
         <p>{post.caption}</p>
 
-        <p>❤️ {post.likeCount}</p>
+        <button className="btn btn-outline-danger" onClick={handleLike}>
+          {liked ? "❤️ Unlike" : "🤍 Like"}
+        </button>
 
-        <p>💬 {post.commentCount}</p>
+        <p className="mt-2">Likes : {likeCount}</p>
+
+        <p>Comments : {post.commentCount}</p>
       </div>
     </div>
   );
