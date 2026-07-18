@@ -1,52 +1,40 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { getCurrentUser } from "../../services/userService";
-import { logout } from "../../services/authService";
+import { getFeed } from "../services/postService";
+import PostCard from "../components/PostCard";
 
 function Home() {
-  const [user, setUser] = useState(null);
-
-  const navigate = useNavigate();
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadUser();
+    loadFeed();
   }, []);
 
-  async function loadUser() {
+  const loadFeed = async () => {
     try {
-      const result = await getCurrentUser();
-
-      if (!result.success) {
-        navigate("/");
-        return;
-      }
-
-      setUser(result.data);
-    } catch (error) {
-      console.error(error);
-      navigate("/");
-    }
-  }
-
-  async function handleLogout() {
-    try {
-      await logout();
+      const response = await getFeed();
+      setPosts(response.data.data);
     } catch (error) {
       console.error(error);
     } finally {
-      navigate("/");
+      setLoading(false);
     }
-  }
+  };
 
-  if (!user) {
+  if (loading) {
     return <h2>Loading...</h2>;
   }
 
   return (
-    <>
-      <h2>Welcome {user.firstname}</h2>
-      <button onClick={handleLogout}>Logout</button>
-    </>
+    <div className="container mt-4">
+      {posts.length === 0 ? (
+        <h4>No posts available.</h4>
+      ) : (
+        posts.map((post) => (
+          <PostCard key={post.id} post={post} refreshFeed={loadFeed} />
+        ))
+      )}
+    </div>
   );
 }
 

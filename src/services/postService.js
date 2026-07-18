@@ -1,0 +1,33 @@
+import api from "./api";
+
+export const getFeed = () => {
+  return api.get("/posts/feed");
+};
+
+export const createPost = (formData) => {
+  return api.post("/posts", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
+export const likePost = (id) => {
+  return api.post(`/posts/${id}/like`);
+};
+
+export const unlikePost = (id) => {
+  return api.delete(`/posts/${id}/like`);
+};
+
+export const getComments = (id) => {
+  return api.get(`/posts/${id}/comments`);
+};
+
+export const addComment = (id, data) => {
+  return api.post(`/posts/${id}/comments`, data);
+};
+
+export const deleteComment = (id) => {
+  return api.delete(`/comments/${id}`);
+};
