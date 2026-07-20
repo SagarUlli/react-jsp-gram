@@ -6,6 +6,7 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Home from "../pages/Home/Home";
 import Profile from "../pages/Profile/Profile";
+import EditProfile from "../pages/EditProfile/EditProfile";
 import CreatePost from "../pages/AddPost/CreatePost";
 import EditPost from "../pages/EditPost/EditPost";
 
@@ -18,6 +19,7 @@ function AppRoutes() {
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/create-post" element={<CreatePost />} />
         <Route path="/posts/edit/:id" element={<EditPost />} />
       </Routes>
