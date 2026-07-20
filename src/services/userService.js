@@ -1,5 +1,4 @@
 import api from "./api";
-import api from "./api";
 
 export const registerUser = (data) => {
   return api.post("/users/register", data);

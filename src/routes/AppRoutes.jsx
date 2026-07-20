@@ -13,8 +13,9 @@ import UserProfile from "../pages/UserProfile/UserProfile";
 import Suggestions from "../pages/Suggestions/Suggestions";
 import Followers from "../pages/Followers/Followers";
 import Following from "../pages/Following/Following";
-import Prime from "../pages/Prime/Prime";
-
+import Prime from "../pages/Payment/Prime";
+import NotFound from "../pages/NotFound/NotFound";
+import ProtectedRoute from "../components/auth/ProtectedRoute";
 function AppRoutes() {
   return (
     <BrowserRouter>
