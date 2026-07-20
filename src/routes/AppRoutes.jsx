@@ -11,6 +11,8 @@ import CreatePost from "../pages/AddPost/CreatePost";
 import EditPost from "../pages/EditPost/EditPost";
 import UserProfile from "../pages/UserProfile/UserProfile";
 import Suggestions from "../pages/Suggestions/Suggestions";
+import Followers from "../pages/Followers/Followers";
+import Following from "../pages/Following/Following";
 
 function AppRoutes() {
   return (
@@ -26,6 +28,8 @@ function AppRoutes() {
         <Route path="/posts/edit/:id" element={<EditPost />} />
         <Route path="/users/:id" element={<UserProfile />} />
         <Route path="/suggestions" element={<Suggestions />} />
+        <Route path="/followers" element={<Followers />} />
+        <Route path="/following" element={<Following />} />
       </Routes>
     </BrowserRouter>
   );

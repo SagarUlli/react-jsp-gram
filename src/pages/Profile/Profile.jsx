@@ -48,13 +48,17 @@ function Profile() {
           </div>
 
           <div className="col">
-            <h5>{user.followersCount}</h5>
-            <p>Followers</p>
+            <Link to="/followers" className="text-decoration-none text-dark">
+              <h5>{user.followersCount}</h5>
+              <p>Followers</p>
+            </Link>
           </div>
 
           <div className="col">
-            <h5>{user.followingCount}</h5>
-            <p>Following</p>
+            <Link to="/following" className="text-decoration-none text-dark">
+              <h5>{user.followingCount}</h5>
+              <p>Following</p>
+            </Link>
           </div>
         </div>
 

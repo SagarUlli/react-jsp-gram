@@ -33,3 +33,11 @@ export const unfollowUser = (id) => {
 export const getSuggestions = () => {
   return api.get("/users/suggestions");
 };
+
+export const getFollowers = () => {
+  return api.get("/users/followers");
+};
+
+export const getFollowing = () => {
+  return api.get("/users/following");
+};
