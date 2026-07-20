@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { getProfile } from "../services/userService";
 import PostCard from "../components/PostCard";
-import { getMyProfile } from "../services/userService";
 
 function Profile() {
   const [user, setUser] = useState(null);
-  const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -13,10 +13,9 @@ function Profile() {
 
   const loadProfile = async () => {
     try {
-      const response = await getMyProfile();
+      const response = await getProfile();
 
       setUser(response.data.data);
-      setPosts(response.data.data.posts);
     } catch (error) {
       console.error(error);
     } finally {
@@ -33,7 +32,7 @@ function Profile() {
       <div className="card p-4 mb-4">
         <img
           src={user.imageUrl}
-          alt={user.username}
+          alt="Profile"
           width="150"
           className="rounded-circle mb-3"
         />
@@ -42,22 +41,31 @@ function Profile() {
 
         <p>{user.bio}</p>
 
-        <div className="d-flex gap-4">
-          <span>
-            <strong>{user.posts.length}</strong> Posts
-          </span>
+        <div className="row text-center">
+          <div className="col">
+            <h5>{user.postCount}</h5>
+            <p>Posts</p>
+          </div>
 
-          <span>
-            <strong>{user.followers.length}</strong> Followers
-          </span>
+          <div className="col">
+            <h5>{user.followersCount}</h5>
+            <p>Followers</p>
+          </div>
 
-          <span>
-            <strong>{user.following.length}</strong> Following
-          </span>
+          <div className="col">
+            <h5>{user.followingCount}</h5>
+            <p>Following</p>
+          </div>
         </div>
+
+        <Link to="/edit-profile" className="btn btn-primary mt-3">
+          Edit Profile
+        </Link>
       </div>
 
-      {posts.map((post) => (
+      <h4>My Posts</h4>
+
+      {user.posts.map((post) => (
         <PostCard key={post.id} post={post} refreshFeed={loadProfile} />
       ))}
     </div>
