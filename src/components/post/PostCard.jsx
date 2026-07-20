@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { likePost, unlikePost } from "../services/postService";
+import CommentSection from "./CommentSection";
 
 function PostCard({ post }) {
   const [liked, setLiked] = useState(post.liked);
   const [likeCount, setLikeCount] = useState(post.likeCount);
+  const [showComments, setShowComments] = useState(false);
 
   const handleLike = async () => {
     try {
@@ -38,7 +40,14 @@ function PostCard({ post }) {
 
         <p className="mt-2">Likes : {likeCount}</p>
 
-        <p>Comments : {post.commentCount}</p>
+        <button
+          className="btn btn-outline-primary ms-2"
+          onClick={() => setShowComments(!showComments)}
+        >
+          💬 Comments ({post.commentCount})
+        </button>
+
+        {showComments && <CommentSection postId={post.id} />}
       </div>
     </div>
   );
