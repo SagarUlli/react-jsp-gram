@@ -13,6 +13,7 @@ import UserProfile from "../pages/UserProfile/UserProfile";
 import Suggestions from "../pages/Suggestions/Suggestions";
 import Followers from "../pages/Followers/Followers";
 import Following from "../pages/Following/Following";
+import Prime from "../pages/Prime/Prime";
 
 function AppRoutes() {
   return (
@@ -30,6 +31,7 @@ function AppRoutes() {
         <Route path="/suggestions" element={<Suggestions />} />
         <Route path="/followers" element={<Followers />} />
         <Route path="/following" element={<Following />} />
+        <Route path="/prime" element={<Prime />} />
       </Routes>
     </BrowserRouter>
   );

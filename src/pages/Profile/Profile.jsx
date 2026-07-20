@@ -72,6 +72,10 @@ function Profile() {
       {user.posts.map((post) => (
         <PostCard key={post.id} post={post} refreshFeed={loadProfile} />
       ))}
+
+      {user.prime && (
+        <span className="badge bg-warning text-dark ms-2">👑 PRIME</span>
+      )}
     </div>
   );
 }

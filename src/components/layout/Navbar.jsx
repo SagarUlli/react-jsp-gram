@@ -24,6 +24,10 @@ function Navbar() {
           <Link to="/suggestions" className="nav-link">
             Suggestions
           </Link>
+
+          <Link to="/prime" className="nav-link">
+            Prime
+          </Link>
         </div>
       </div>
     </nav>
