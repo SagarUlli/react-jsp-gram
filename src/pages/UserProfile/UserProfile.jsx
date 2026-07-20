@@ -5,7 +5,7 @@ import {
   followUser,
   unfollowUser,
 } from "../../services/userService";
-import PostCard from "../../components/PostCard";
+import PostCard from "../../components/post/PostCard";
 
 function UserProfile() {
   const { id } = useParams();

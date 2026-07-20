@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { likePost, unlikePost, deletePost } from "../../services/postService";
-import CommentSection from "../CommentSection";
+import CommentSection from "../../pages/Comments/CommentSection";
 function PostCard({ post, refreshFeed }) {
   const [liked, setLiked] = useState(post.liked);
   const [likeCount, setLikeCount] = useState(post.likeCount);

@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import Navbar from "../components/layout/Navbar";
 
@@ -18,7 +18,7 @@ import NotFound from "../pages/NotFound/NotFound";
 import ProtectedRoute from "../components/auth/ProtectedRoute";
 function AppRoutes() {
   return (
-    <BrowserRouter>
+    <>
       <Navbar />
       <Routes>
         <Route
@@ -119,7 +119,7 @@ function AppRoutes() {
         />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
 
