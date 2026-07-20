@@ -32,23 +32,23 @@ function Navbar() {
             <NavLink to="/home" className="nav-link">
               Home
             </NavLink>
-
+            <br />
             <NavLink to="/create-post" className="nav-link">
               Create Post
             </NavLink>
-
+            <br />
             <NavLink to="/suggestions" className="nav-link">
               Suggestions
             </NavLink>
-
+            <br />
             <NavLink to="/prime" className="nav-link">
               Prime
             </NavLink>
-
+            <br />
             <NavLink to="/profile" className="nav-link">
               Profile
             </NavLink>
-
+            <br />
             <button
               className="btn btn-outline-light ms-lg-3 mt-2 mt-lg-0"
               onClick={handleLogout}

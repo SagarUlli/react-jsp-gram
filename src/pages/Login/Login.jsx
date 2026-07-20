@@ -12,13 +12,15 @@ function Login() {
     e.preventDefault();
 
     try {
-      const result = await login(username, password);
+      const response = await login(username, password);
+      const result = response.data;
 
       if (result.success) {
+        sessionStorage.setItem("user", JSON.stringify(result.data));
         toast.success(result.message);
         navigate("/home");
       } else {
-        toast.success(result.message);
+        toast.error(result.message);
       }
     } catch (error) {
       console.error(error);
