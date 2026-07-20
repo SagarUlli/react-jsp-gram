@@ -3,7 +3,7 @@ import {
   getComments,
   addComment,
   deleteComment,
-} from "../services/postService";
+} from "../../services/postService";
 
 function CommentSection({ postId }) {
   const [comments, setComments] = useState([]);

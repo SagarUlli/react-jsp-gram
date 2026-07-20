@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getFollowers } from "../services/userService";
+import { getFollowers } from "../../services/userService";
 
 function Followers() {
   const [followers, setFollowers] = useState([]);

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createPost } from "../services/postService";
+import { createPost } from "../../services/postService";
 
 function CreatePost() {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ function CreatePost() {
     e.preventDefault();
 
     if (!image) {
-      alert("Please select an image");
+      toast.success("Please select an image");
       return;
     }
 

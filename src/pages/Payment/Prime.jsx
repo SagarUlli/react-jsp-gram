@@ -1,4 +1,4 @@
-import { createOrder, verifyPayment } from "../services/paymentService";
+import { createOrder, verifyPayment } from "../../services/paymentService";
 
 function Prime() {
   const loadRazorpay = () => {
@@ -19,7 +19,7 @@ function Prime() {
     const loaded = await loadRazorpay();
 
     if (!loaded) {
-      alert("Unable to load Razorpay.");
+      toast.success("Unable to load Razorpay.");
       return;
     }
 
@@ -49,7 +49,7 @@ function Prime() {
           razorpaySignature: response.razorpay_signature,
         });
 
-        alert("Payment Successful");
+        toast.success("Payment Successful");
 
         window.location.href = "/profile";
       },

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getSuggestions, followUser } from "../services/userService";
+import { getSuggestions, followUser } from "../../services/userService";
 
 function Suggestions() {
   const [users, setUsers] = useState([]);
@@ -33,7 +33,7 @@ function Suggestions() {
   };
 
   if (loading) {
-    return <h3>Loading...</h3>;
+    return <Loader />;
   }
 
   if (users.length === 0) {

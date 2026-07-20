@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getProfile, updateProfile } from "../services/userService";
+import { getProfile, updateProfile } from "../../services/userService";
 
 function EditProfile() {
   const navigate = useNavigate();
@@ -59,7 +59,7 @@ function EditProfile() {
   };
 
   if (loading) {
-    return <h3>Loading...</h3>;
+    return <Loader />;
   }
 
   return (

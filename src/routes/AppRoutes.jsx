@@ -20,18 +20,103 @@ function AppRoutes() {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/edit-profile" element={<EditProfile />} />
-        <Route path="/create-post" element={<CreatePost />} />
-        <Route path="/posts/edit/:id" element={<EditPost />} />
-        <Route path="/users/:id" element={<UserProfile />} />
-        <Route path="/suggestions" element={<Suggestions />} />
-        <Route path="/followers" element={<Followers />} />
-        <Route path="/following" element={<Following />} />
-        <Route path="/prime" element={<Prime />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Login />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <ProtectedRoute>
+              <Register />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/edit-profile"
+          element={
+            <ProtectedRoute>
+              <EditProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/create-post"
+          element={
+            <ProtectedRoute>
+              <CreatePost />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/posts/edit/:id"
+          element={
+            <ProtectedRoute>
+              <EditPost />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/users/:id"
+          element={
+            <ProtectedRoute>
+              <UserProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/suggestions"
+          element={
+            <ProtectedRoute>
+              <Suggestions />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/followers"
+          element={
+            <ProtectedRoute>
+              <Followers />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/following"
+          element={
+            <ProtectedRoute>
+              <Following />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/prime"
+          element={
+            <ProtectedRoute>
+              <Prime />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

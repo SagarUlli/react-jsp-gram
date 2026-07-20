@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getFeed } from "../services/postService";
+import { getFeed } from "../../services/postService";
 import PostCard from "../components/PostCard";
 
 function Home() {
@@ -22,7 +22,7 @@ function Home() {
   };
 
   if (loading) {
-    return <h2>Loading...</h2>;
+    return <Loader />;
   }
 
   return (

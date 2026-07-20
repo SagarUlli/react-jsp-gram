@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getPost, updatePost } from "../services/postService";
+import { getPost, updatePost } from "../../services/postService";
 
 function EditPost() {
   const { id } = useParams();
@@ -60,7 +60,7 @@ function EditPost() {
   };
 
   if (loading) {
-    return <h3>Loading...</h3>;
+    return <Loader />;
   }
 
   return (

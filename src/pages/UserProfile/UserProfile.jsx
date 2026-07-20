@@ -4,7 +4,7 @@ import {
   getUserProfile,
   followUser,
   unfollowUser,
-} from "../services/userService";
+} from "../../services/userService";
 import PostCard from "../components/PostCard";
 
 function UserProfile() {
@@ -44,7 +44,7 @@ function UserProfile() {
   };
 
   if (loading) {
-    return <h3>Loading...</h3>;
+    return <Loader />;
   }
 
   return (

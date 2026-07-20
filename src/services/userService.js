@@ -1,6 +1,10 @@
 import api from "./api";
 import api from "./api";
 
+export const registerUser = (data) => {
+  return api.post("/users/register", data);
+};
+
 export const getCurrentUser = async () => {
   const response = await api.get("/api/me");
   return response.data;

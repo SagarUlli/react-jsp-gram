@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getProfile } from "../services/userService";
+import { getProfile } from "../../services/userService";
 import PostCard from "../components/PostCard";
 
 function Profile() {
@@ -24,7 +24,7 @@ function Profile() {
   };
 
   if (loading) {
-    return <h3>Loading...</h3>;
+    return <Loader />;
   }
 
   return (

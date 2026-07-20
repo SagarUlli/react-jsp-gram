@@ -15,15 +15,15 @@ function Login() {
       const result = await login(username, password);
 
       if (result.success) {
-        alert(result.message);
+        toast.success(result.message);
         navigate("/home");
       } else {
-        alert(result.message);
+        toast.success(result.message);
       }
     } catch (error) {
       console.error(error);
 
-      alert("Unable to connect to server.");
+      toast.success("Unable to connect to server.");
     }
   };
 

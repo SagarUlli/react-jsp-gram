@@ -1,33 +1,61 @@
-import { Link } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    sessionStorage.clear();
+    navigate("/login");
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
-        <Link className="navbar-brand" to="/home">
+        <NavLink className="navbar-brand" to="/home">
           JSPGram
-        </Link>
+        </NavLink>
 
-        <div className="navbar-nav ms-auto">
-          <Link className="nav-link" to="/home">
-            Home
-          </Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
 
-          <Link className="nav-link" to="/create-post">
-            Create Post
-          </Link>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <div className="navbar-nav ms-auto">
+            <NavLink to="/home" className="nav-link">
+              Home
+            </NavLink>
 
-          <Link className="nav-link" to="/profile">
-            Profile
-          </Link>
+            <NavLink to="/create-post" className="nav-link">
+              Create Post
+            </NavLink>
 
-          <Link to="/suggestions" className="nav-link">
-            Suggestions
-          </Link>
+            <NavLink to="/suggestions" className="nav-link">
+              Suggestions
+            </NavLink>
 
-          <Link to="/prime" className="nav-link">
-            Prime
-          </Link>
+            <NavLink to="/prime" className="nav-link">
+              Prime
+            </NavLink>
+
+            <NavLink to="/profile" className="nav-link">
+              Profile
+            </NavLink>
+
+            <button
+              className="btn btn-outline-light ms-lg-3 mt-2 mt-lg-0"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
+          </div>
         </div>
       </div>
     </nav>
