@@ -1,26 +1,25 @@
 import { useState } from "react";
-import { likePost, unlikePost } from "../services/postService";
+import { Link } from "react-router-dom";
+import { likePost, unlikePost, deletePost } from "../services/postService";
 import CommentSection from "./CommentSection";
-import { deletePost } from "../services/postService";
 
-function PostCard({ post }) {
+function PostCard({ post, refreshFeed }) {
   const [liked, setLiked] = useState(post.liked);
   const [likeCount, setLikeCount] = useState(post.likeCount);
   const [showComments, setShowComments] = useState(false);
 
   const handleLike = async () => {
     try {
+      let response;
+
       if (liked) {
-        const response = await unlikePost(post.id);
-
-        setLiked(response.data.data.liked);
-        setLikeCount(response.data.data.likeCount);
+        response = await unlikePost(post.id);
       } else {
-        const response = await likePost(post.id);
-
-        setLiked(response.data.data.liked);
-        setLikeCount(response.data.data.likeCount);
+        response = await likePost(post.id);
       }
+
+      setLiked(response.data.data.liked);
+      setLikeCount(response.data.data.likeCount);
     } catch (error) {
       console.error(error);
     }
@@ -38,7 +37,8 @@ function PostCard({ post }) {
     try {
       await deletePost(post.id);
 
-      refreshFeed();
+      // Refresh parent page if available
+      refreshFeed?.();
     } catch (error) {
       console.error(error);
     }
@@ -49,20 +49,35 @@ function PostCard({ post }) {
       <img src={post.imageUrl} alt="Post" className="card-img-top" />
 
       <div className="card-body">
-        <h5>{post.user.username}</h5>
+        {/* Username */}
+        <Link
+          to={`/users/${post.user.id}`}
+          className="text-decoration-none text-dark"
+        >
+          <h5>{post.user.username}</h5>
+        </Link>
 
+        {/* Caption */}
         <p>{post.caption}</p>
 
-        <div className="d-flex align-items-center gap-2 mt-2">
+        {/* Action Buttons */}
+        <div className="d-flex align-items-center gap-2 flex-wrap mt-2">
           <button className="btn btn-outline-danger" onClick={handleLike}>
             {liked ? "❤️ Unlike" : "🤍 Like"}
+          </button>
+
+          <button
+            className="btn btn-outline-primary"
+            onClick={() => setShowComments(!showComments)}
+          >
+            💬 Comments ({post.commentCount})
           </button>
 
           {post.ownPost && (
             <>
               <Link
                 to={`/posts/edit/${post.id}`}
-                className="btn btn-warning btn-sm me-2"
+                className="btn btn-warning btn-sm"
               >
                 Edit
               </Link>
@@ -72,17 +87,17 @@ function PostCard({ post }) {
               </button>
             </>
           )}
-
-          <button
-            className="btn btn-outline-primary"
-            onClick={() => setShowComments(!showComments)}
-          >
-            💬 Comments ({post.commentCount})
-          </button>
         </div>
 
-        <p className="mt-2">Likes : {likeCount}</p>
-        {showComments && <CommentSection postId={post.id} />}
+        {/* Like Count */}
+        <p className="mt-3 mb-0">❤️ Likes: {likeCount}</p>
+
+        {/* Comments */}
+        {showComments && (
+          <div className="mt-3">
+            <CommentSection postId={post.id} />
+          </div>
+        )}
       </div>
     </div>
   );

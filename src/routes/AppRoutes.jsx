@@ -9,6 +9,7 @@ import Profile from "../pages/Profile/Profile";
 import EditProfile from "../pages/EditProfile/EditProfile";
 import CreatePost from "../pages/AddPost/CreatePost";
 import EditPost from "../pages/EditPost/EditPost";
+import UserProfile from "../pages/UserProfile/UserProfile";
 
 function AppRoutes() {
   return (
@@ -22,6 +23,7 @@ function AppRoutes() {
         <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/create-post" element={<CreatePost />} />
         <Route path="/posts/edit/:id" element={<EditPost />} />
+        <Route path="/users/:id" element={<UserProfile />} />
       </Routes>
     </BrowserRouter>
   );

@@ -17,3 +17,15 @@ export const updateProfile = (formData) => {
     },
   });
 };
+
+export const getUserProfile = (id) => {
+  return api.get(`/users/${id}`);
+};
+
+export const followUser = (id) => {
+  return api.post(`/users/${id}/follow`);
+};
+
+export const unfollowUser = (id) => {
+  return api.delete(`/users/${id}/follow`);
+};
