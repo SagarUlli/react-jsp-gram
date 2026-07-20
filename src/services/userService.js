@@ -4,6 +4,16 @@ export const registerUser = (data) => {
   return api.post("/users/register", data);
 };
 
+export const verifyOtp = (data) => {
+  return api.post("/users/verify-otp", data);
+};
+
+export const resendOtp = (userId) => {
+  return api.post("/users/resend-otp", {
+    userId,
+  });
+};
+
 export const getCurrentUser = async () => {
   const response = await api.get("/users/me");
   return response.data;

@@ -30,18 +30,23 @@ function Register() {
     try {
       const response = await registerUser(user);
 
+      console.log("Register Response:", response.data);
+
       if (response.data.success) {
         toast.success(response.data.message);
 
         navigate(`/otp/${response.data.data}`);
       } else {
+        console.log("Validation Errors:", response.data.errors);
+
         toast.error(response.data.message);
       }
     } catch (error) {
+      console.log("Error Response:", error.response?.data);
+
       toast.error(error.response?.data?.message || "Registration failed");
     }
   };
-
   return (
     <div className="container mt-5">
       <div className="card p-4">

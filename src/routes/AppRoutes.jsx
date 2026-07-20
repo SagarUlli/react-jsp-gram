@@ -4,6 +4,7 @@ import Navbar from "../components/layout/Navbar";
 
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import Otp from "../pages/Otp/Otp";
 import Home from "../pages/Home/Home";
 import Profile from "../pages/Profile/Profile";
 import EditProfile from "../pages/EditProfile/EditProfile";
@@ -24,6 +25,7 @@ function AppRoutes() {
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/otp/:userId" element={<Otp />} />
         <Route
           path="/home"
           element={
