@@ -31,3 +31,19 @@ export const addComment = (id, data) => {
 export const deleteComment = (id) => {
   return api.delete(`/comments/${id}`);
 };
+
+export const getPost = (id) => {
+  return api.get(`/posts/${id}`);
+};
+
+export const updatePost = (id, formData) => {
+  return api.put(`/posts/${id}`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
+export const deletePost = (id) => {
+  return api.delete(`/posts/${id}`);
+};

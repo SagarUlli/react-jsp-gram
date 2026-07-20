@@ -34,19 +34,26 @@ function PostCard({ post }) {
 
         <p>{post.caption}</p>
 
-        <button className="btn btn-outline-danger" onClick={handleLike}>
-          {liked ? "❤️ Unlike" : "🤍 Like"}
-        </button>
+        <div className="d-flex align-items-center gap-2 mt-2">
+          <button className="btn btn-outline-danger" onClick={handleLike}>
+            {liked ? "❤️ Unlike" : "🤍 Like"}
+          </button>
+
+          {post.ownPost && (
+            <Link to={`/posts/edit/${post.id}`} className="btn btn-warning">
+              ✏️ Edit
+            </Link>
+          )}
+
+          <button
+            className="btn btn-outline-primary"
+            onClick={() => setShowComments(!showComments)}
+          >
+            💬 Comments ({post.commentCount})
+          </button>
+        </div>
 
         <p className="mt-2">Likes : {likeCount}</p>
-
-        <button
-          className="btn btn-outline-primary ms-2"
-          onClick={() => setShowComments(!showComments)}
-        >
-          💬 Comments ({post.commentCount})
-        </button>
-
         {showComments && <CommentSection postId={post.id} />}
       </div>
     </div>
