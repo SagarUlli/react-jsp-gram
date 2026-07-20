@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { login } from "../../services/authService";
-
 function Login() {
+  const user = sessionStorage.getItem("user");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -25,7 +25,7 @@ function Login() {
     } catch (error) {
       console.error(error);
 
-      toast.success("Unable to connect to server.");
+      toast.error("Unable to connect to server.");
     }
   };
 
@@ -54,7 +54,14 @@ function Login() {
         <br />
         <br />
 
-        <button type="submit">Login</button>
+        <button type="submit" className="btn btn-primary w-100">
+          Login
+        </button>
+
+        <div className="text-center mt-3">
+          <span>Don't have an account? </span>
+          <Link to="/register">Register</Link>
+        </div>
       </form>
     </div>
   );

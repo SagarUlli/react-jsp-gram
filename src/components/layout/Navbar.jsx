@@ -2,6 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 function Navbar() {
   const navigate = useNavigate();
+  const user = sessionStorage.getItem("user");
 
   const handleLogout = () => {
     sessionStorage.clear();
@@ -29,32 +30,49 @@ function Navbar() {
 
         <div className="collapse navbar-collapse" id="navbarNav">
           <div className="navbar-nav ms-auto">
-            <NavLink to="/home" className="nav-link">
-              Home
-            </NavLink>
-            <br />
-            <NavLink to="/create-post" className="nav-link">
-              Create Post
-            </NavLink>
-            <br />
-            <NavLink to="/suggestions" className="nav-link">
-              Suggestions
-            </NavLink>
-            <br />
-            <NavLink to="/prime" className="nav-link">
-              Prime
-            </NavLink>
-            <br />
-            <NavLink to="/profile" className="nav-link">
-              Profile
-            </NavLink>
-            <br />
-            <button
-              className="btn btn-outline-light ms-lg-3 mt-2 mt-lg-0"
-              onClick={handleLogout}
-            >
-              Logout
-            </button>
+            {user ? (
+              <>
+                <NavLink
+                  className="navbar-brand"
+                  to={user ? "/home" : "/login"}
+                >
+                  Home
+                </NavLink>
+
+                <NavLink to="/create-post" className="nav-link">
+                  Create Post
+                </NavLink>
+
+                <NavLink to="/suggestions" className="nav-link">
+                  Suggestions
+                </NavLink>
+
+                <NavLink to="/prime" className="nav-link">
+                  Prime
+                </NavLink>
+
+                <NavLink to="/profile" className="nav-link">
+                  Profile
+                </NavLink>
+
+                <button
+                  className="btn btn-outline-light ms-lg-3 mt-2 mt-lg-0"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <NavLink to="/login" className="nav-link">
+                  Login
+                </NavLink>
+
+                <NavLink to="/register" className="nav-link">
+                  Register
+                </NavLink>
+              </>
+            )}
           </div>
         </div>
       </div>
