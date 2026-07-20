@@ -10,6 +10,7 @@ import EditProfile from "../pages/EditProfile/EditProfile";
 import CreatePost from "../pages/AddPost/CreatePost";
 import EditPost from "../pages/EditPost/EditPost";
 import UserProfile from "../pages/UserProfile/UserProfile";
+import Suggestions from "../pages/Suggestions/Suggestions";
 
 function AppRoutes() {
   return (
@@ -24,6 +25,7 @@ function AppRoutes() {
         <Route path="/create-post" element={<CreatePost />} />
         <Route path="/posts/edit/:id" element={<EditPost />} />
         <Route path="/users/:id" element={<UserProfile />} />
+        <Route path="/suggestions" element={<Suggestions />} />
       </Routes>
     </BrowserRouter>
   );

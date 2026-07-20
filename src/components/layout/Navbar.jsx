@@ -20,6 +20,10 @@ function Navbar() {
           <Link className="nav-link" to="/profile">
             Profile
           </Link>
+
+          <Link to="/suggestions" className="nav-link">
+            Suggestions
+          </Link>
         </div>
       </div>
     </nav>

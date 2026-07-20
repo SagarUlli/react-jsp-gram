@@ -29,3 +29,7 @@ export const followUser = (id) => {
 export const unfollowUser = (id) => {
   return api.delete(`/users/${id}/follow`);
 };
+
+export const getSuggestions = () => {
+  return api.get("/users/suggestions");
+};
