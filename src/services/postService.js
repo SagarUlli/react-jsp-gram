@@ -21,11 +21,11 @@ export const unlikePost = (id) => {
 };
 
 export const getComments = (id) => {
-  return api.get(`/posts/${id}/comments`);
+  return api.get(`/comments/${id}/comments`);
 };
 
 export const addComment = (id, data) => {
-  return api.post(`/posts/${id}/comments`, data);
+  return api.post(`/comments/${id}/comments`, data);
 };
 
 export const deleteComment = (id) => {

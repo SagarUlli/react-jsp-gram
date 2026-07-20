@@ -5,16 +5,16 @@ export const registerUser = (data) => {
 };
 
 export const getCurrentUser = async () => {
-  const response = await api.get("/api/me");
+  const response = await api.get("/users/me");
   return response.data;
 };
 
 export const getProfile = () => {
-  return api.get("/users/profile");
+  return api.get("/profile");
 };
 
 export const updateProfile = (formData) => {
-  return api.put("/users/profile", formData, {
+  return api.put("/profile", formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
