@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { likePost, unlikePost } from "../services/postService";
 import CommentSection from "./CommentSection";
+import { deletePost } from "../services/postService";
 
 function PostCard({ post }) {
   const [liked, setLiked] = useState(post.liked);
@@ -25,6 +26,24 @@ function PostCard({ post }) {
     }
   };
 
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this post?",
+    );
+
+    if (!confirmDelete) {
+      return;
+    }
+
+    try {
+      await deletePost(post.id);
+
+      refreshFeed();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="card mb-4 shadow-sm">
       <img src={post.imageUrl} alt="Post" className="card-img-top" />
@@ -40,9 +59,18 @@ function PostCard({ post }) {
           </button>
 
           {post.ownPost && (
-            <Link to={`/posts/edit/${post.id}`} className="btn btn-warning">
-              ✏️ Edit
-            </Link>
+            <>
+              <Link
+                to={`/posts/edit/${post.id}`}
+                className="btn btn-warning btn-sm me-2"
+              >
+                Edit
+              </Link>
+
+              <button className="btn btn-danger btn-sm" onClick={handleDelete}>
+                Delete
+              </button>
+            </>
           )}
 
           <button
