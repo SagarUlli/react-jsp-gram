@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getProfile, updateProfile } from "../../services/userService";
 import Loader from "../../components/common/Loader";
+import "../../styles/EditProfile.css";
 
 function EditProfile() {
   const navigate = useNavigate();
@@ -64,44 +65,44 @@ function EditProfile() {
   }
 
   return (
-    <div className="container mt-4">
-      <div className="card p-4">
-        <h3>Edit Profile</h3>
+    <div className="container py-5">
+      <div className="row justify-content-center">
+        <div className="col-lg-8">
+          <div className="card edit-card shadow border-0 p-5">
+            <h2 className="text-center fw-bold mb-4">Edit Profile</h2>
 
-        <div className="text-center mb-3">
-          <img
-            src={preview}
-            alt="Profile"
-            width="150"
-            height="150"
-            className="rounded-circle"
-          />
+            <form onSubmit={handleSubmit}>
+              <div className="text-center mb-4">
+                <img src={preview} alt="Profile" className="profile-preview" />
+              </div>
+
+              <div className="mb-4">
+                <input
+                  type="file"
+                  className="form-control"
+                  accept="image/*"
+                  onChange={handleImage}
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="form-label fw-semibold">Bio</label>
+
+                <textarea
+                  className="form-control"
+                  rows="5"
+                  placeholder="Tell people about yourself..."
+                  value={bio}
+                  onChange={(e) => setBio(e.target.value)}
+                />
+              </div>
+
+              <button className="btn btn-primary btn-lg rounded-pill w-100">
+                Save Changes
+              </button>
+            </form>
+          </div>
         </div>
-
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <input
-              type="file"
-              className="form-control"
-              accept="image/*"
-              onChange={handleImage}
-            />
-          </div>
-
-          <div className="mb-3">
-            <textarea
-              className="form-control"
-              rows="4"
-              value={bio}
-              onChange={(e) => setBio(e.target.value)}
-              placeholder="Write something about yourself..."
-            />
-          </div>
-
-          <button className="btn btn-primary" type="submit">
-            Save Changes
-          </button>
-        </form>
       </div>
     </div>
   );

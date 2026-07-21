@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { createPost } from "../../services/postService";
-import "./CreatePost.css";
+import "../../styles/CreatePost.css";
 
 function CreatePost() {
   const navigate = useNavigate();
