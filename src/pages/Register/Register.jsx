@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { register } from "../../services/authService";
+import { registerUser } from "../../services/userService";
 import { toast } from "react-toastify";
 
 import AOS from "aos";
@@ -37,7 +37,7 @@ function Register() {
     e.preventDefault();
 
     try {
-      const result = await register(form);
+      const result = await registerUser(form);
 
       if (result.success) {
         toast.success(result.message);
