@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getSuggestions, followUser } from "../../services/userService";
+import Loader from "../../components/common/Loader";
 
 function Suggestions() {
   const [users, setUsers] = useState([]);

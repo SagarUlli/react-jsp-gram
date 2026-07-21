@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getProfile } from "../../services/userService";
 import PostCard from "../../components/post/PostCard";
+import Loader from "../../components/common/Loader";
 
 function Profile() {
   const [user, setUser] = useState(null);

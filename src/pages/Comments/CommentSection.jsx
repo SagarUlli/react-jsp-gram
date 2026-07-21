@@ -17,6 +17,7 @@ function CommentSection({ postId }) {
     try {
       const response = await getComments(postId);
       setComments(response.data.data);
+      refreshCommentCount?.(response.data.data.length);
     } catch (error) {
       console.error(error);
     }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getPost, updatePost } from "../../services/postService";
+import Loader from "../../components/common/Loader";
 
 function EditPost() {
   const { id } = useParams();

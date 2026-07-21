@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getProfile, updateProfile } from "../../services/userService";
+import Loader from "../../components/common/Loader";
 
 function EditProfile() {
   const navigate = useNavigate();

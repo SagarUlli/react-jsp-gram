@@ -6,6 +6,7 @@ import {
   unfollowUser,
 } from "../../services/userService";
 import PostCard from "../../components/post/PostCard";
+import Loader from "../../components/common/Loader";
 
 function UserProfile() {
   const { id } = useParams();

@@ -5,6 +5,7 @@ import CommentSection from "../../pages/Comments/CommentSection";
 function PostCard({ post, refreshFeed }) {
   const [liked, setLiked] = useState(post.liked);
   const [likeCount, setLikeCount] = useState(post.likeCount);
+  const [commentCount, setCommentCount] = useState(post.commentCount);
   const [showComments, setShowComments] = useState(false);
 
   const handleLike = async () => {
@@ -16,36 +17,43 @@ function PostCard({ post, refreshFeed }) {
       } else {
         response = await likePost(post.id);
       }
+      const updatedPost = response.data.data;
 
-      setLiked(response.data.data.liked);
-      setLikeCount(response.data.data.likeCount);
+      if (updatedPost) {
+        setLiked(updatedPost.liked);
+        setLikeCount(updatedPost.likeCount);
+      }
     } catch (error) {
       console.error(error);
     }
   };
 
   const handleDelete = async () => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this post?",
-    );
-
-    if (!confirmDelete) {
+    if (!window.confirm("Are you sure you want to delete this post?")) {
       return;
     }
 
     try {
       await deletePost(post.id);
 
-      // Refresh parent page if available
       refreshFeed?.();
     } catch (error) {
       console.error(error);
+
+      toast.error("Failed to delete post.");
     }
   };
 
   return (
     <div className="card mb-4 shadow-sm">
-      <img src={post.imageUrl} alt="Post" className="card-img-top" />
+      {post.imageUrl && (
+        <img
+          src={post.imageUrl}
+          alt="Post"
+          className="card-img-top"
+          style={{ maxHeight: "500px", objectFit: "cover" }}
+        />
+      )}
 
       <div className="card-body">
         {/* Username */}
@@ -69,7 +77,7 @@ function PostCard({ post, refreshFeed }) {
             className="btn btn-outline-primary"
             onClick={() => setShowComments(!showComments)}
           >
-            💬 Comments ({post.commentCount})
+            💬 Comments ({commentCount})
           </button>
 
           {post.ownPost && (
@@ -94,7 +102,11 @@ function PostCard({ post, refreshFeed }) {
         {/* Comments */}
         {showComments && (
           <div className="mt-3">
-            <CommentSection postId={post.id} />
+            <CommentSection
+              postId={post.id}
+              refreshFeed={refreshFeed}
+              refreshCommentCount={setCommentCount}
+            />{" "}
           </div>
         )}
       </div>

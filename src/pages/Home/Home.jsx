@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getFeed } from "../../services/postService";
 import PostCard from "../../components/post/PostCard";
+import Loader from "../../components/common/Loader";
 
 function Home() {
   const [posts, setPosts] = useState([]);
