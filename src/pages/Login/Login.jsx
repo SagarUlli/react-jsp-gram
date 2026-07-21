@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { login } from "../../services/authService";
+import { toast } from "react-toastify";
 function Login() {
   const user = sessionStorage.getItem("user");
   const [username, setUsername] = useState("");
@@ -12,8 +13,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await login(username, password);
-      const result = response.data;
+      const result = await login(username, password);
 
       if (result.success) {
         sessionStorage.setItem("user", JSON.stringify(result.data));
@@ -24,7 +24,6 @@ function Login() {
       }
     } catch (error) {
       console.error(error);
-
       toast.error("Unable to connect to server.");
     }
   };
