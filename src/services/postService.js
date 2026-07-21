@@ -1,7 +1,7 @@
 import api from "./api";
 
 export const getFeed = () => {
-  return api.get("/posts/feed");
+  return api.get("/posts");
 };
 
 export const createPost = (formData) => {

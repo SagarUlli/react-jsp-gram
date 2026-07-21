@@ -1,4 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
+import "./Navbar.css";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -10,9 +11,9 @@ function Navbar() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
       <div className="container">
-        <NavLink className="navbar-brand" to="/home">
+        <NavLink className="navbar-brand fw-bold fs-3 me-5" to="/home">
           JSPGram
         </NavLink>
 
@@ -29,34 +30,34 @@ function Navbar() {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarNav">
-          <div className="navbar-nav ms-auto">
+          <div className="navbar-nav ms-auto align-items-lg-center">
             {user ? (
               <>
                 <NavLink
-                  className="navbar-brand"
+                  className="nav-link px-3 mx-1"
                   to={user ? "/home" : "/login"}
                 >
                   Home
                 </NavLink>
 
-                <NavLink to="/create-post" className="nav-link">
+                <NavLink className="nav-link px-3 mx-1" to="/create-post">
                   Create Post
                 </NavLink>
 
-                <NavLink to="/suggestions" className="nav-link">
+                <NavLink className="nav-link px-3 mx-1" to="/suggestions">
                   Suggestions
                 </NavLink>
 
-                <NavLink to="/prime" className="nav-link">
+                <NavLink className="nav-link px-3 mx-1" to="/prime">
                   Prime
                 </NavLink>
 
-                <NavLink to="/profile" className="nav-link">
+                <NavLink className="nav-link px-3 mx-1" to="/profile">
                   Profile
                 </NavLink>
 
                 <button
-                  className="btn btn-outline-light ms-lg-3 mt-2 mt-lg-0"
+                  className="btn btn-outline-light rounded-pill ms-lg-4 mt-3 mt-lg-0 px-4"
                   onClick={handleLogout}
                 >
                   Logout
@@ -64,11 +65,11 @@ function Navbar() {
               </>
             ) : (
               <>
-                <NavLink to="/login" className="nav-link">
+                <NavLink className="nav-link px-3 mx-1" to="/login">
                   Login
                 </NavLink>
 
-                <NavLink to="/register" className="nav-link">
+                <NavLink className="nav-link px-3 mx-1" to="/register">
                   Register
                 </NavLink>
               </>
