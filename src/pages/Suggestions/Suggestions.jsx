@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getSuggestions, followUser } from "../../services/userService";
 import Loader from "../../components/common/Loader";
+import "./Suggestions.css";
 
 function Suggestions() {
   const [users, setUsers] = useState([]);
@@ -46,29 +47,66 @@ function Suggestions() {
   }
 
   return (
-    <div className="container mt-4">
-      <h3 className="mb-4">Suggestions</h3>
+    <div className="container py-5">
+      <div className="text-center mb-5">
+        <h2 className="fw-bold">Suggested Users</h2>
 
-      {users.map((user) => (
-        <div key={user.id} className="card p-3 mb-3">
-          <div className="d-flex justify-content-between align-items-center">
-            <div>
-              <Link to={`/users/${user.id}`} className="text-decoration-none">
-                <h5>{user.username}</h5>
-              </Link>
+        <p className="text-muted">Discover people you may know</p>
+      </div>
 
-              <p>{user.bio}</p>
+      <div className="row">
+        {users.map((user) => (
+          <div key={user.id} className="col-lg-4 col-md-6 mb-4">
+            <div className="card suggestion-card border-0 shadow h-100">
+              <div className="card-body text-center">
+                <Link
+                  to={`/users/${user.id}`}
+                  className="text-decoration-none text-dark"
+                >
+                  <img
+                    src={
+                      user.imageUrl || "https://placehold.co/100x100?text=User"
+                    }
+                    alt={user.username}
+                    className="suggestion-avatar mb-3"
+                  />
+
+                  <h5 className="user-name">{user.username}</h5>
+                </Link>
+
+                <p className="text-muted mb-1">
+                  {user.firstname} {user.lastname}
+                </p>
+
+                <p className="text-secondary user-bio">
+                  {user.bio || "No bio added yet."}
+                </p>
+
+                <div className="row text-center mb-3">
+                  <div className="col">
+                    <h6 className="mb-0">{user.followersCount}</h6>
+
+                    <small className="text-muted">Followers</small>
+                  </div>
+
+                  <div className="col">
+                    <h6 className="mb-0">{user.followingCount}</h6>
+
+                    <small className="text-muted">Following</small>
+                  </div>
+                </div>
+
+                <button
+                  className="btn btn-primary follow-btn w-100"
+                  onClick={() => handleFollow(user.id)}
+                >
+                  Follow
+                </button>
+              </div>
             </div>
-
-            <button
-              className="btn btn-primary"
-              onClick={() => handleFollow(user.id)}
-            >
-              Follow
-            </button>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

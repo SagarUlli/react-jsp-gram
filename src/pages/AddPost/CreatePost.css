@@ -1,0 +1,39 @@
+.preview-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.upload-placeholder {
+  height: 350px;
+  border: 2px dashed #cfd8dc;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #f8f9fa;
+}
+
+.caption-box {
+  resize: none;
+  border-radius: 18px !important;
+}
+
+.caption-box:focus {
+  box-shadow: none;
+}
+
+input[type="file"] {
+  cursor: pointer;
+}
+
+.card {
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}

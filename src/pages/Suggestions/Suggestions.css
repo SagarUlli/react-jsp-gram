@@ -1,0 +1,29 @@
+.suggestion-card {
+  transition: 0.3s;
+  border-radius: 20px;
+}
+
+.suggestion-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.suggestion-avatar {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #0d6efd;
+}
+
+.follow-btn {
+  border-radius: 30px;
+}
+
+.user-name {
+  font-weight: 700;
+}
+
+.user-bio {
+  min-height: 48px;
+}

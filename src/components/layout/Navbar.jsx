@@ -1,80 +1,95 @@
-import { NavLink, useNavigate } from "react-router-dom";
-import "./Navbar.css";
+import { Link } from "react-router-dom";
 
 function Navbar() {
-  const navigate = useNavigate();
-  const user = sessionStorage.getItem("user");
-
-  const handleLogout = () => {
-    sessionStorage.clear();
-    navigate("/login");
-  };
-
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
+    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
       <div className="container">
-        <NavLink className="navbar-brand fw-bold fs-3 me-5" to="/home">
-          JSPGram
-        </NavLink>
+        <Link className="navbar-brand fw-bold fs-3 text-primary" to="/home">
+          📸 JSPGram
+        </Link>
 
         <button
           className="navbar-toggler"
-          type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+          data-bs-target="#navbar"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <div className="navbar-nav ms-auto align-items-lg-center">
-            {user ? (
-              <>
-                <NavLink
-                  className="nav-link px-3 mx-1"
-                  to={user ? "/home" : "/login"}
-                >
-                  Home
-                </NavLink>
+        <div className="collapse navbar-collapse" id="navbar">
+          {/* Search */}
 
-                <NavLink className="nav-link px-3 mx-1" to="/create-post">
-                  Create Post
-                </NavLink>
+          <form className="mx-auto w-50">
+            <input
+              type="search"
+              className="form-control rounded-pill"
+              placeholder="Search users..."
+            />
+          </form>
 
-                <NavLink className="nav-link px-3 mx-1" to="/suggestions">
-                  Suggestions
-                </NavLink>
+          {/* Menu */}
 
-                <NavLink className="nav-link px-3 mx-1" to="/prime">
-                  Prime
-                </NavLink>
+          <ul className="navbar-nav ms-auto align-items-center">
+            <li className="nav-item">
+              <Link className="nav-link" to="/home">
+                <i className="bi bi-house-door-fill fs-5"></i>
+              </Link>
+            </li>
 
-                <NavLink className="nav-link px-3 mx-1" to="/profile">
-                  Profile
-                </NavLink>
+            <li className="nav-item">
+              <Link className="nav-link" to="/create-post">
+                <i className="bi bi-plus-square fs-5"></i>
+              </Link>
+            </li>
 
-                <button
-                  className="btn btn-outline-light rounded-pill ms-lg-4 mt-3 mt-lg-0 px-4"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </button>
-              </>
-            ) : (
-              <>
-                <NavLink className="nav-link px-3 mx-1" to="/login">
-                  Login
-                </NavLink>
+            <li className="nav-item">
+              <Link className="nav-link" to="/suggestions">
+                <i className="bi bi-people-fill fs-5"></i>
+              </Link>
+            </li>
 
-                <NavLink className="nav-link px-3 mx-1" to="/register">
-                  Register
-                </NavLink>
-              </>
-            )}
-          </div>
+            <li className="nav-item">
+              <Link className="nav-link" to="/prime">
+                <i className="bi bi-star-fill text-warning fs-5"></i>
+              </Link>
+            </li>
+
+            <li className="nav-item dropdown">
+              <a
+                href="/"
+                className="nav-link dropdown-toggle"
+                role="button"
+                data-bs-toggle="dropdown"
+                onClick={(e) => e.preventDefault()}
+              >
+                <i className="bi bi-person-circle fs-4"></i>
+              </a>
+
+              <ul className="dropdown-menu dropdown-menu-end">
+                <li>
+                  <Link className="dropdown-item" to="/profile">
+                    Profile
+                  </Link>
+                </li>
+
+                <li>
+                  <Link className="dropdown-item" to="/edit-profile">
+                    Edit Profile
+                  </Link>
+                </li>
+
+                <li>
+                  <hr className="dropdown-divider" />
+                </li>
+
+                <li>
+                  <Link className="dropdown-item text-danger" to="/logout">
+                    Logout
+                  </Link>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
