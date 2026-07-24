@@ -25,7 +25,7 @@ export const getComments = (id) => {
 };
 
 export const addComment = (id, data) => {
-  return api.post(`/comments/${id}/comments`, data);
+  return api.post(`/comments/${id}`, data);
 };
 
 export const deleteComment = (id) => {

@@ -21,7 +21,7 @@ function CommentBox({ postId }) {
     try {
       const response = await getComments(postId);
 
-      setComments(response.data.data);
+      setComments(response.data.data || []);
     } catch (error) {
       console.error(error);
     }
@@ -33,13 +33,13 @@ function CommentBox({ postId }) {
     try {
       setLoading(true);
 
-      await addComment(postId, {
+      const response = await addComment(postId, {
         comment: comment,
       });
 
-      setComment("");
+      setComments((prev) => [...prev, response.data.data]);
 
-      loadComments();
+      setComment("");
     } catch (error) {
       console.error(error);
     } finally {
@@ -84,7 +84,7 @@ function CommentBox({ postId }) {
               />
 
               <div>
-                <h6>{item.user.username}</h6>
+                <h6>{item.user.username || "User"}</h6>
 
                 <p>{item.comment}</p>
               </div>
