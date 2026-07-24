@@ -42,7 +42,7 @@ function Register() {
       if (result.success) {
         toast.success(result.message);
 
-        navigate(`/verify-otp/${result.data.userId}`);
+        navigate(`/verify-otp/${result.data}`);
       } else {
         toast.error(result.message);
       }
