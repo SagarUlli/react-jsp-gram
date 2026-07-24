@@ -1,6 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Analytics } from "@vercel/analytics/react";
 
 import AppRoutes from "./routes/AppRoutes";
 
@@ -18,6 +19,8 @@ function App() {
         draggable
         theme="light"
       />
+
+      <Analytics />
     </BrowserRouter>
   );
 }
