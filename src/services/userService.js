@@ -1,7 +1,8 @@
 import api from "./api";
 
 export const registerUser = (data) => {
-  return api.post("/users/register", data);
+  const response = await api.post("/users/register", data);
+  return response.data;
 };
 
 export const verifyOtp = (data) => {
