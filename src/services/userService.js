@@ -1,15 +1,15 @@
 import api from "./api";
 
-export const registerUser = (data) => {
+export const registerUser = async (data) => {
   const response = await api.post("/users/register", data);
   return response.data;
 };
 
-export const verifyOtp = (data) => {
+export const verifyOtp = async (data) => {
   return api.post("/users/verify-otp", data);
 };
 
-export const resendOtp = (userId) => {
+export const resendOtp = async (userId) => {
   return api.post("/users/resend-otp", {
     userId,
   });
