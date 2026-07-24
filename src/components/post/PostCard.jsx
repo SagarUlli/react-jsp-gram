@@ -1,48 +1,75 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import "./PostCard.css";
+
+import "../../styles/PostCard.css";
+
+import { likePost, unlikePost, deletePost } from "../../services/postService";
+
+import CommentBox from "../../pages/CommentBox/CommentBox";
 
 function PostCard({ post, refreshFeed }) {
+  const [liked, setLiked] = useState(post.liked);
+
+  const [likeCount, setLikeCount] = useState(post.likeCount);
+
+  const [showComments, setShowComments] = useState(false);
+
+  const handleLike = async () => {
+    try {
+      if (liked) {
+        await unlikePost(post.id);
+
+        setLiked(false);
+
+        setLikeCount((prev) => prev - 1);
+      } else {
+        await likePost(post.id);
+
+        setLiked(true);
+
+        setLikeCount((prev) => prev + 1);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this post?",
+    );
+
+    if (!confirmDelete) return;
+
+    try {
+      await deletePost(post.id);
+
+      refreshFeed();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <div
-      className="card border-0 shadow rounded-4 overflow-hidden h-100"
-      style={{
-        transition: "0.3s",
-        cursor: "pointer",
-      }}
-    >
+    <div className="post-card">
       {/* Post Image */}
 
-      <img
-        src={post.imageUrl}
-        alt="Post"
-        className="card-img-top"
-        style={{
-          height: "320px",
-          objectFit: "cover",
-        }}
-      />
+      <img src={post.imageUrl} alt="Post" className="post-image" />
 
-      {/* Card Body */}
+      <div className="post-body">
+        {/* User Header */}
 
-      <div className="card-body">
-        {/* User */}
-
-        <div className="d-flex align-items-center mb-3">
+        <div className="post-user d-flex align-items-center">
           <img
-            src={post.user.imageUrl || "https://placehold.co/45x45?text=U"}
+            src={post.user.imageUrl || "https://placehold.co/60x60?text=U"}
             alt="User"
-            className="rounded-circle me-3"
-            width="45"
-            height="45"
-            style={{
-              objectFit: "cover",
-            }}
+            className="post-avatar"
           />
 
-          <div>
-            <h6 className="mb-0 fw-bold">{post.user.username}</h6>
+          <div className="ms-3">
+            <h6 className="post-username">{post.user.username}</h6>
 
-            <small className="text-muted">
+            <small className="post-date">
               {new Date(post.postedTime).toLocaleString()}
             </small>
           </div>
@@ -50,34 +77,45 @@ function PostCard({ post, refreshFeed }) {
 
         {/* Caption */}
 
-        <p className="card-text">{post.caption}</p>
+        <p className="post-caption">{post.caption}</p>
 
-        {/* Like & Comment */}
+        {/* Bottom Actions */}
 
-        <div className="d-flex justify-content-between mt-4">
-          <div>
-            <button className="btn btn-sm btn-outline-danger me-2">
-              ❤️ {post.likesCount}
+        <div className="post-footer">
+          <div className="reaction-buttons">
+            <button
+              onClick={handleLike}
+              className={
+                liked ? "reaction-btn like-btn active" : "reaction-btn like-btn"
+              }
+            >
+              ❤️ {likeCount}
             </button>
 
-            <button className="btn btn-sm btn-outline-primary">
-              💬 {post.commentsCount}
+            <button
+              onClick={() => setShowComments(!showComments)}
+              className="reaction-btn comment-btn"
+            >
+              💬 {post.commentCount}
             </button>
           </div>
 
           {post.ownPost && (
-            <div>
-              <Link
-                to={`/edit-post/${post.id}`}
-                className="btn btn-sm btn-outline-warning me-2"
-              >
-                Edit
+            <div className="owner-actions">
+              <Link to={`/posts/edit/${post.id}`} className="edit-btn">
+                ✏️ Edit
               </Link>
 
-              <button className="btn btn-sm btn-outline-danger">Delete</button>
+              <button onClick={handleDelete} className="delete-btn">
+                🗑 Delete
+              </button>
             </div>
           )}
         </div>
+
+        {/* Comments */}
+
+        {showComments && <CommentBox postId={post.id} />}
       </div>
     </div>
   );

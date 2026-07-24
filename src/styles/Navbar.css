@@ -59,3 +59,26 @@
 .dropdown-menu {
   border-radius: 15px;
 }
+
+/* Remove underline from all React Router links */
+a,
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none !important;
+}
+
+/* Navbar / menu links */
+.nav-link,
+.navbar a,
+.sidebar a,
+.dropdown-item {
+  text-decoration: none !important;
+}
+
+.nav-link:hover,
+.navbar a:hover,
+.sidebar a:hover,
+.dropdown-item:hover {
+  text-decoration: none !important;
+}

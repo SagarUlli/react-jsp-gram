@@ -1,0 +1,164 @@
+.home-page {
+  min-height: 100vh;
+  background: #f5f7fb;
+}
+
+/* COMMON CARD */
+
+.home-card {
+  background: white;
+  border-radius: 22px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  border: none;
+  overflow: hidden;
+}
+
+/* PROFILE */
+
+.profile-cover {
+  height: 90px;
+  background: linear-gradient(135deg, #111827, #4f46e5);
+}
+
+.profile-content {
+  text-align: center;
+  padding: 0 25px 30px;
+}
+
+.profile-image {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid white;
+  margin-top: -55px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.profile-name {
+  margin-top: 15px;
+  font-weight: 700;
+}
+
+.profile-bio {
+  color: #6b7280;
+  font-size: 14px;
+  min-height: 40px;
+}
+
+/* BUTTONS */
+
+.custom-btn {
+  display: block;
+  text-decoration: none !important;
+  text-align: center;
+  padding: 12px 20px;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.dark-btn {
+  background: #111827;
+  color: white;
+}
+
+.dark-btn:hover {
+  background: #000;
+  color: white;
+}
+
+.primary-btn {
+  background: #2563eb;
+  color: white;
+}
+
+.primary-btn:hover {
+  background: #1d4ed8;
+  color: white;
+}
+
+/* FEED HEADER */
+
+.feed-header {
+  margin-bottom: 25px;
+}
+
+.feed-header h2 {
+  font-weight: 800;
+  color: #111827;
+}
+
+.feed-header p {
+  color: #6b7280;
+}
+
+/* POSTS */
+
+.post-wrapper {
+  margin-bottom: 25px;
+}
+
+/* EMPTY STATE */
+
+.empty-card {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-icon {
+  font-size: 50px;
+}
+
+/* ACTION CARD */
+
+.actions-card {
+  padding: 25px;
+}
+
+.actions-card h5 {
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.action-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  text-decoration: none !important;
+
+  color: #111827;
+
+  padding: 15px;
+
+  border-radius: 16px;
+
+  margin-bottom: 12px;
+
+  font-weight: 600;
+
+  transition: 0.25s;
+}
+
+.action-link span {
+  font-size: 22px;
+}
+
+.action-link:hover {
+  transform: translateY(-3px);
+}
+
+.action-link.create {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.action-link.friends {
+  background: #f3f4f6;
+}
+
+.action-link.prime {
+  background: #fff7ed;
+  color: #c2410c;
+}
