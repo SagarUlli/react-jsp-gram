@@ -25,7 +25,7 @@ function AppRoutes() {
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/otp/:userId" element={<Otp />} />
+        <Route path="/verify-otp/:userId" element={<Otp />} />
         <Route
           path="/home"
           element={
