@@ -1,16 +1,80 @@
-# React + Vite
+# JSPGram - Social Media Web Application (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
 
-Currently, two official plugins are available:
+JSPGram Frontend is a React-based social media application that consumes the JSPGram Spring Boot REST APIs. It provides authentication, profile management, post interactions, social networking features, and Prime membership integration through a responsive user interface.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech Stack
 
-## React Compiler
+- React
+- Vite
+- JavaScript (ES6+)
+- React Router
+- Axios
+- Bootstrap 5
+- React Toastify
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+### Authentication
+- Login and Registration
+- OTP Verification
+- Protected Routes
+- Session-based Authentication
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Home Feed
+- View posts from followed users
+- Like and unlike posts
+- Add and view comments
+
+### Post Management
+- Create posts
+- Edit posts
+- Delete posts
+- Upload images
+
+### User Management
+- View profile
+- Edit profile
+- View other users' profiles
+- Follow and unfollow users
+- User suggestions
+- Followers and following pages
+
+### Prime Membership
+- Razorpay Checkout integration
+- Payment verification
+- Prime badge display
+
+### UI Features
+- Responsive layout using Bootstrap
+- Toast notifications
+- Loading indicators
+- Axios interceptors
+- Environment-based API configuration
+- Custom 404 page
+
+## Project Structure
+
+- Components
+- Pages
+- Services
+- Routes
+- Utilities
+
+## Backend
+
+This frontend consumes REST APIs developed using Spring Boot.
+
+## Build
+
+```bash
+npm install
+npm run dev
+```
+
+Production Build
+
+```bash
+npm run build
+```
