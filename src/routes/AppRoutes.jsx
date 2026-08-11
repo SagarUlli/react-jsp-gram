@@ -106,7 +106,6 @@ function AppRoutes() {
             </ProtectedRoute>
           }
         />
-        <Route path="*" element={<NotFound />} />
         <Route path="/logout" element={<Register />} />
       </Routes>
     </>
