@@ -55,3 +55,9 @@ export const getFollowers = () => {
 export const getFollowing = () => {
   return api.get("/users/following");
 };
+
+export const searchUsers = (username) => {
+  return api.get("/users/search", {
+    params: { username },
+  });
+};

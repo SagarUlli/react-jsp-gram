@@ -106,6 +106,14 @@ function AppRoutes() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/search"
+          element={
+            <ProtectedRoute>
+              <SearchUsers />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/logout" element={<Register />} />
       </Routes>
     </>

@@ -1,6 +1,6 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios'; // Make sure axios is installed
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios"; // Make sure axios is installed
 
 const LogoutButton = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
@@ -9,7 +9,10 @@ const LogoutButton = ({ setIsAuthenticated }) => {
     try {
       await logout();
     } catch (error) {
-      console.error("Server logout failed, proceeding with local cleanup:", error);
+      console.error(
+        "Server logout failed, proceeding with local cleanup:",
+        error,
+      );
     } finally {
       // Clear client-side storage
       localStorage.removeItem("authToken");
@@ -23,11 +26,7 @@ const LogoutButton = ({ setIsAuthenticated }) => {
     }
   };
 
-  return (
-    <button onClick={handleLogout}>
-      Log Out
-    </button>
-  );
+  return <button onClick={handleLogout}>Log Out</button>;
 };
 
 export default LogoutButton;

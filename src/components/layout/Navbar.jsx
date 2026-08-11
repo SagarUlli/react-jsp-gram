@@ -1,7 +1,24 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/Navbar.css";
 
 function Navbar() {
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    const username = query.trim();
+
+    if (!username) {
+      navigate("/search");
+      return;
+    }
+
+    navigate(`/search?username=${encodeURIComponent(username)}`);
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
       <div className="container">
@@ -19,17 +36,17 @@ function Navbar() {
 
         <div className="collapse navbar-collapse" id="navbar">
           {/* Search */}
-
-          <form className="mx-auto w-50">
+          <form className="mx-auto w-50" onSubmit={handleSearch}>
             <input
               type="search"
               className="form-control rounded-pill"
               placeholder="Search users..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
             />
           </form>
 
           {/* Menu */}
-
           <ul className="navbar-nav ms-auto align-items-center">
             <li className="nav-item">
               <Link className="nav-link" to="/home">
