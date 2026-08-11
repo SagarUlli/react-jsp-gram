@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 
 import Navbar from "../components/layout/Navbar";
 
@@ -15,108 +15,65 @@ import Suggestions from "../pages/Suggestions/Suggestions";
 import Followers from "../pages/Followers/Followers";
 import Following from "../pages/Following/Following";
 import Prime from "../pages/Payment/Prime";
+import SearchUsers from "../pages/SearchUsers/SearchUsers";
 import NotFound from "../pages/NotFound/NotFound";
+
 import ProtectedRoute from "../components/auth/ProtectedRoute";
+
+function ProtectedLayout() {
+  return (
+    <ProtectedRoute>
+      <Navbar />
+      <Outlet />
+    </ProtectedRoute>
+  );
+}
+
 function AppRoutes() {
   return (
-    <>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/verify-otp/:userId" element={<Otp />} />
-        <Route
-          path="/home"
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/edit-profile"
-          element={
-            <ProtectedRoute>
-              <EditProfile />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/create-post"
-          element={
-            <ProtectedRoute>
-              <CreatePost />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/posts/edit/:id"
-          element={
-            <ProtectedRoute>
-              <EditPost />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/users/:id"
-          element={
-            <ProtectedRoute>
-              <UserProfile />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/suggestions"
-          element={
-            <ProtectedRoute>
-              <Suggestions />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/followers"
-          element={
-            <ProtectedRoute>
-              <Followers />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/following"
-          element={
-            <ProtectedRoute>
-              <Following />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/prime"
-          element={
-            <ProtectedRoute>
-              <Prime />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/search"
-          element={
-            <ProtectedRoute>
-              <SearchUsers />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/logout" element={<Register />} />
-      </Routes>
-    </>
+    <Routes>
+      {/* ================= PUBLIC ROUTES ================= */}
+
+      <Route path="/" element={<Login />} />
+
+      <Route path="/login" element={<Login />} />
+
+      <Route path="/register" element={<Register />} />
+
+      <Route path="/verify-otp/:userId" element={<Otp />} />
+
+      {/* ================= PROTECTED ROUTES ================= */}
+
+      <Route element={<ProtectedLayout />}>
+        <Route path="/home" element={<Home />} />
+
+        <Route path="/profile" element={<Profile />} />
+
+        <Route path="/edit-profile" element={<EditProfile />} />
+
+        <Route path="/create-post" element={<CreatePost />} />
+
+        <Route path="/posts/edit/:id" element={<EditPost />} />
+
+        <Route path="/users/:id" element={<UserProfile />} />
+
+        <Route path="/suggestions" element={<Suggestions />} />
+
+        <Route path="/followers" element={<Followers />} />
+
+        <Route path="/following" element={<Following />} />
+
+        <Route path="/prime" element={<Prime />} />
+
+        <Route path="/search" element={<SearchUsers />} />
+
+        <Route path="/users/:id" element={<UserProfile />} />
+      </Route>
+
+      {/* ================= 404 ================= */}
+
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }
 
