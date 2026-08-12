@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import NotificationBadge from "../../pages/NotificationBadge/NotificationBadge";
 import "../../styles/Navbar.css";
 
 function Navbar() {
@@ -60,6 +61,9 @@ function Navbar() {
                 <i className="bi bi-people-fill fs-5"></i>
               </Link>
             </li>
+
+            {/*Notifications*/}
+            <NotificationBadge />
 
             <li className="nav-item">
               <Link className="nav-link" to="/prime">

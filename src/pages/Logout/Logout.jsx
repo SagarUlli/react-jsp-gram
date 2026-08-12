@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios"; // Make sure axios is installed
+import { logout } from "../../services/authService"; // Ensure this service exists
 
 const LogoutButton = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();

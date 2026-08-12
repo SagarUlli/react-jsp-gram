@@ -17,6 +17,7 @@ import Following from "../pages/Following/Following";
 import Prime from "../pages/Payment/Prime";
 import SearchUsers from "../pages/SearchUsers/SearchUsers";
 import NotFound from "../pages/NotFound/NotFound";
+import Notifications from "../pages/Notifications/Notifications";
 
 import ProtectedRoute from "../components/auth/ProtectedRoute";
 
@@ -67,7 +68,7 @@ function AppRoutes() {
 
         <Route path="/search" element={<SearchUsers />} />
 
-        <Route path="/users/:id" element={<UserProfile />} />
+        <Route path="/notifications" element={<Notifications />} />
       </Route>
 
       {/* ================= 404 ================= */}
