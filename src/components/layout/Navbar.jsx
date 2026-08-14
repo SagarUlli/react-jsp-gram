@@ -66,6 +66,12 @@ function Navbar() {
             <NotificationBadge />
 
             <li className="nav-item">
+              <Link className="nav-link" to="/bookmarks">
+                <i className="bi bi-bookmark-fill fs-5"></i>
+              </Link>
+            </li>
+
+            <li className="nav-item">
               <Link className="nav-link" to="/prime">
                 <i className="bi bi-star-fill text-warning fs-5"></i>
               </Link>

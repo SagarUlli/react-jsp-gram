@@ -18,6 +18,7 @@ import Prime from "../pages/Payment/Prime";
 import SearchUsers from "../pages/SearchUsers/SearchUsers";
 import NotFound from "../pages/NotFound/NotFound";
 import Notifications from "../pages/Notifications/Notifications";
+import Bookmarks from "../pages/Bookmarks/Bookmarks";
 
 import ProtectedRoute from "../components/auth/ProtectedRoute";
 
@@ -69,6 +70,8 @@ function AppRoutes() {
         <Route path="/search" element={<SearchUsers />} />
 
         <Route path="/notifications" element={<Notifications />} />
+
+        <Route path="/bookmarks" element={<Bookmarks />} />
       </Route>
 
       {/* ================= 404 ================= */}

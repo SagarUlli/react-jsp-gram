@@ -5,12 +5,15 @@ import "../../styles/PostCard.css";
 
 import { likePost, unlikePost, deletePost } from "../../services/postService";
 
+import { bookmarkPost, unbookmarkPost } from "../../services/bookmarkService";
+
 import CommentBox from "../../pages/CommentBox/CommentBox";
 
 function PostCard({ post, refreshFeed }) {
   const [liked, setLiked] = useState(post.liked);
-
   const [likeCount, setLikeCount] = useState(post.likeCount);
+
+  const [bookmarked, setBookmarked] = useState(post.bookmarked || false);
 
   const [showComments, setShowComments] = useState(false);
 
@@ -20,17 +23,31 @@ function PostCard({ post, refreshFeed }) {
         await unlikePost(post.id);
 
         setLiked(false);
-
-        setLikeCount((prev) => prev - 1);
+        setLikeCount((prev) => Math.max(0, prev - 1));
       } else {
         await likePost(post.id);
 
         setLiked(true);
-
         setLikeCount((prev) => prev + 1);
       }
     } catch (error) {
-      console.error(error);
+      console.error("Like action failed:", error);
+    }
+  };
+
+  const handleBookmark = async () => {
+    try {
+      if (bookmarked) {
+        await unbookmarkPost(post.id);
+
+        setBookmarked(false);
+      } else {
+        await bookmarkPost(post.id);
+
+        setBookmarked(true);
+      }
+    } catch (error) {
+      console.error("Bookmark action failed:", error);
     }
   };
 
@@ -46,7 +63,7 @@ function PostCard({ post, refreshFeed }) {
 
       refreshFeed();
     } catch (error) {
-      console.error(error);
+      console.error("Delete failed:", error);
     }
   };
 
@@ -83,6 +100,8 @@ function PostCard({ post, refreshFeed }) {
 
         <div className="post-footer">
           <div className="reaction-buttons">
+            {/* Like */}
+
             <button
               onClick={handleLike}
               className={
@@ -92,13 +111,31 @@ function PostCard({ post, refreshFeed }) {
               ❤️ {likeCount}
             </button>
 
+            {/* Comment */}
+
             <button
               onClick={() => setShowComments(!showComments)}
               className="reaction-btn comment-btn"
             >
               💬 {post.commentCount}
             </button>
+
+            {/* Bookmark */}
+
+            <button
+              onClick={handleBookmark}
+              className={
+                bookmarked
+                  ? "reaction-btn bookmark-btn active"
+                  : "reaction-btn bookmark-btn"
+              }
+              title={bookmarked ? "Remove bookmark" : "Bookmark post"}
+            >
+              {bookmarked ? "🔖 Saved" : "🔖 Save"}
+            </button>
           </div>
+
+          {/* Owner Actions */}
 
           {post.ownPost && (
             <div className="owner-actions">
