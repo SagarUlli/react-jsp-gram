@@ -26,21 +26,32 @@ function EditProfile() {
       try {
         const response = await getProfile();
 
-        // Safely extract the profile from the API response.
-        const user = response.data?.data;
+        console.log("Full profile response:", response);
+        console.log("Response data:", response.data);
+        console.log("Response data.data:", response.data?.data);
 
-        if (!user) {
-          throw new Error(
-            "Profile data is missing. Please try again."
-          );
+        const user =
+          response.data?.data?.user ??
+          response.data?.data ??
+          response.data?.user ??
+          response.data;
+
+        if (!user || typeof user !== "object") {
+          throw new Error("Profile data is missing from the API response.");
         }
+
+        setBio(user.bio ?? "");
+        setPreview(
+          user.imageUrl ||
+          "https://placehold.co/180x180?text=User"
+        );
 
         if (!active) return;
 
         setBio(user.bio ?? "");
         setPreview(
           user.imageUrl ||
-            "https://placehold.co/180x180?text=User"
+          "https://placehold.co/180x180?text=User"
         );
       } catch (err) {
         console.error("Failed to load profile:", err);
@@ -48,8 +59,8 @@ function EditProfile() {
         if (active) {
           setError(
             err.response?.data?.message ||
-              err.message ||
-              "Unable to load your profile."
+            err.message ||
+            "Unable to load your profile."
           );
         }
       } finally {
@@ -109,7 +120,7 @@ function EditProfile() {
 
       setError(
         err.response?.data?.message ||
-          "Failed to update your profile. Please try again."
+        "Failed to update your profile. Please try again."
       );
     } finally {
       setSaving(false);
