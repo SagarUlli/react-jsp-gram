@@ -19,9 +19,7 @@ import CommentBox from "../../pages/CommentBox/CommentBox";
 function PostCard({ post, refreshFeed }) {
   const [liked, setLiked] = useState(post?.liked ?? false);
   const [likeCount, setLikeCount] = useState(post?.likeCount ?? 0);
-  const [bookmarked, setBookmarked] = useState(
-    post?.bookmarked ?? false
-  );
+  const [bookmarkLoading, setBookmarkLoading] = useState(false);
   const [showComments, setShowComments] = useState(false);
 
   // Prevent crashes if post data is missing.
@@ -57,16 +55,26 @@ function PostCard({ post, refreshFeed }) {
   };
 
   const handleBookmark = async () => {
+    if (bookmarkLoading) return;
+
+    setBookmarkLoading(true);
+
     try {
-      if (bookmarked) {
-        await unbookmarkPost(post.id);
-        setBookmarked(false);
-      } else {
-        await bookmarkPost(post.id);
-        setBookmarked(true);
-      }
+      const response = bookmarked
+        ? await unbookmarkPost(post.id)
+        : await bookmarkPost(post.id);
+
+      const updatedPost = response.data.data;
+
+      setBookmarked(
+        typeof updatedPost?.bookmarked === "boolean"
+          ? updatedPost.bookmarked
+          : !bookmarked
+      );
     } catch (error) {
       console.error("Bookmark action failed:", error);
+    } finally {
+      setBookmarkLoading(false);
     }
   };
 
@@ -165,18 +173,20 @@ function PostCard({ post, refreshFeed }) {
             <button
               type="button"
               onClick={handleBookmark}
+              disabled={bookmarkLoading}
               className={
                 bookmarked
                   ? "reaction-btn bookmark-btn active"
                   : "reaction-btn bookmark-btn"
               }
-              title={
-                bookmarked
-                  ? "Remove bookmark"
-                  : "Bookmark post"
-              }
+              title={bookmarked ? "Remove bookmark" : "Bookmark post"}
+              aria-pressed={bookmarked}
             >
-              {bookmarked ? "🔖 Saved" : "🔖 Save"}
+              {bookmarkLoading
+                ? "Saving..."
+                : bookmarked
+                  ? "🔖 Saved"
+                  : "🔖 Save"}
             </button>
           </div>
 
