@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import "../../styles/PostCard.css";
 
 import {
+  deletePost,
   likePost,
   unlikePost,
-  deletePost,
 } from "../../services/postService";
 
 import {
@@ -16,11 +16,16 @@ import {
 
 import CommentBox from "../../pages/CommentBox/CommentBox";
 
+import { sharePost } from "../../services/shareService";
+
 function PostCard({ post, refreshFeed }) {
   const [liked, setLiked] = useState(post?.liked ?? false);
   const [likeCount, setLikeCount] = useState(post?.likeCount ?? 0);
+  const [bookmarked, setBookmarked] = useState(post?.bookmarked ?? false);
   const [bookmarkLoading, setBookmarkLoading] = useState(false);
   const [showComments, setShowComments] = useState(false);
+  const [shareCount, setShareCount] = useState(post?.shareCount ?? 0);
+  const [sharing, setSharing] = useState(false);
 
   // Prevent crashes if post data is missing.
   if (!post) {
@@ -93,6 +98,37 @@ function PostCard({ post, refreshFeed }) {
       }
     } catch (error) {
       console.error("Delete failed:", error);
+    }
+  };
+
+  const handleShare = async () => {
+    if (sharing) return;
+
+    setSharing(true);
+
+    try {
+      const postUrl = `${window.location.origin}/posts/${post.id}`;
+
+      // Copy the post link first.
+      await navigator.clipboard.writeText(postUrl);
+
+      // Record the share in the backend.
+      const response = await sharePost(post.id);
+      const updatedPost = response.data.data;
+
+      setShareCount(updatedPost?.shareCount ?? shareCount + 1);
+
+      // Refresh the feed if the callback exists.
+      if (refreshFeed) {
+        await refreshFeed();
+      }
+
+      alert("Post link copied!");
+    } catch (error) {
+      console.error("Failed to share post:", error);
+      alert("Unable to share post. Please try again.");
+    } finally {
+      setSharing(false);
     }
   };
 
@@ -187,6 +223,16 @@ function PostCard({ post, refreshFeed }) {
                 : bookmarked
                   ? "🔖 Saved"
                   : "🔖 Save"}
+            </button>
+
+            {/* Share */}
+            <button
+              type="button"
+              onClick={handleShare}
+              disabled={sharing}
+              className="reaction-btn share-btn"
+            >
+              {sharing ? "Sharing..." : `🔗 Share (${shareCount})`}
             </button>
           </div>
 
