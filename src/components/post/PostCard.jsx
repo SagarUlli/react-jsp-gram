@@ -102,33 +102,32 @@ function PostCard({ post, refreshFeed }) {
   };
 
   const handleShare = async () => {
-    if (sharing) return;
-
-    setSharing(true);
+    const postUrl = `${window.location.origin}/posts/${post.id}`;
 
     try {
-      const postUrl = `${window.location.origin}/posts/${post.id}`;
-
-      // Copy the post link first.
-      await navigator.clipboard.writeText(postUrl);
-
-      // Record the share in the backend.
       const response = await sharePost(post.id);
       const updatedPost = response.data.data;
 
-      setShareCount(updatedPost?.shareCount ?? shareCount + 1);
-
-      // Refresh the feed if the callback exists.
-      if (refreshFeed) {
-        await refreshFeed();
+      if (onPostUpdate) {
+        onPostUpdate(updatedPost);
       }
 
-      alert("Post link copied!");
+      if (navigator.share) {
+        await navigator.share({
+          title: "Check out this post on JSP Gram",
+          url: postUrl,
+        });
+      } else {
+        await navigator.clipboard.writeText(postUrl);
+        alert("Post link copied!");
+      }
     } catch (error) {
-      console.error("Failed to share post:", error);
-      alert("Unable to share post. Please try again.");
-    } finally {
-      setSharing(false);
+      if (error.name === "AbortError") {
+        return;
+      }
+
+      console.error("Sharing failed:", error);
+      alert("Unable to share this post. Please try again.");
     }
   };
 
