@@ -20,7 +20,7 @@ JSPGram Frontend is a React-based social media application that consumes the JSP
 - Login and Registration
 - OTP Verification
 - Protected Routes
-- Session-based Authentication
+- JWT Authentication (token stored in localStorage, sent as a Bearer header)
 
 ### Home Feed
 - View posts from followed users

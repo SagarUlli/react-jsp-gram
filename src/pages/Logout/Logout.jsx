@@ -16,7 +16,7 @@ const LogoutButton = ({ setIsAuthenticated }) => {
       );
     } finally {
       // Clear client-side storage
-      localStorage.removeItem("authToken");
+      localStorage.removeItem("authToken"); // same key as TOKEN_KEY in services/api.js
       sessionStorage.clear();
 
       // Reset application authentication state

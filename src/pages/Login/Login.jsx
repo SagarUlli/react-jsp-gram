@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { login } from "../../services/authService";
+import { TOKEN_KEY } from "../../services/api";
 import { toast } from "react-toastify";
 
 import AOS from "aos";
@@ -25,7 +26,9 @@ function Login() {
       const result = await login(username, password);
 
       if (result.success) {
-        sessionStorage.setItem("user", JSON.stringify(result.data));
+        // Backend returns { token, tokenType, expiresInSeconds, user }
+        localStorage.setItem(TOKEN_KEY, result.data.token);
+        sessionStorage.setItem("user", JSON.stringify(result.data.user));
         toast.success(result.message);
         navigate("/home");
       } else {

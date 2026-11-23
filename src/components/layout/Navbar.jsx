@@ -1,4 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../../services/authService";
+import { TOKEN_KEY } from "../../services/api";
 import NotificationBadge from "../../pages/NotificationBadge/NotificationBadge";
 import "../../styles/Navbar.css";
 
@@ -14,6 +16,19 @@ function Navbar() {
       navigate(`/search?username=${encodeURIComponent(query)}`);
     }
   };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error("Server logout failed, continuing with local cleanup", error);
+    } finally {
+      localStorage.removeItem(TOKEN_KEY);
+      sessionStorage.clear();
+      navigate("/login", { replace: true });
+    }
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
       <div className="container">
@@ -106,9 +121,13 @@ function Navbar() {
                 </li>
 
                 <li>
-                  <Link className="dropdown-item text-danger" to="/logout">
+                  <button
+                    type="button"
+                    className="dropdown-item text-danger"
+                    onClick={handleLogout}
+                  >
                     Logout
-                  </Link>
+                  </button>
                 </li>
               </ul>
             </li>
